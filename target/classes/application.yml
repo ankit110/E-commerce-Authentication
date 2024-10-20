@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+#logging:
+#  level:
+#    io:
+#      jsonwebtoken: DEBUG
+#    org:
+#      springframework:
+#        security: DEBUG
+spring:
+  application:
+    name: User-Authentication
+  datasource:
+    url: jdbc:postgresql://localhost:5432/my_ecommerce_db
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
