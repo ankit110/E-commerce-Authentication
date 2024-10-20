@@ -35,7 +35,6 @@ public class JwtUtil {
                    .signWith(secretKey)
                    .compact();
     }
-
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
     }

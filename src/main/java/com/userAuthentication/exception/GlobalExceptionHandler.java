@@ -24,7 +24,6 @@ public class GlobalExceptionHandler {
         // Return the response entity with the HTTP status from the exception
         return new ResponseEntity<>(errorResponse, ex.getHttpStatus());
     }
-
     @ExceptionHandler(JwtTokenException.class)
     public ResponseEntity<String> handleJwtTokenException(JwtTokenException ex) {
         // Log the exception if needed

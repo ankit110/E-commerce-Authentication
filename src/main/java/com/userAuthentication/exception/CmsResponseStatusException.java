@@ -14,7 +14,6 @@ public class CmsResponseStatusException extends RuntimeException {
         this.source = source;
         this.errorCode = errorCode;
     }
-
     public HttpStatus getHttpStatus() {
         return this.httpStatus;
     }

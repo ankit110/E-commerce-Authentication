@@ -5,7 +5,6 @@ public class CustomErrorResponse {
     private String error;
     private String message;
     private long timestamp;
-
     public CustomErrorResponse(int status, String error, String message) {
         this.status = status;
         this.error = error;
