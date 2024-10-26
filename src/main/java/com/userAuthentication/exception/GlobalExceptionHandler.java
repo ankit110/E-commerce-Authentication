@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.SignatureException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(CmsResponseStatusException.class)
+    @ExceptionHandler({CmsResponseStatusException.class, SignatureException.class})
+
     @ResponseBody
     public ResponseEntity<ErrorResponse> handleCmsResponseStatusException(CmsResponseStatusException ex) {
         // Create a custom error response
