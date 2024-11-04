@@ -2,3 +2,6 @@
 Test set: com.userAuthentication.UserAuthEntityAuthenticationApplicationTests
 -------------------------------------------------------------------------------
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.507 s -- in com.userAuthentication.UserAuthEntityAuthenticationApplicationTests
+
+
+https://chatgpt.com/share/671e7ab9-6524-8005-9cfd-2951b7026ae3

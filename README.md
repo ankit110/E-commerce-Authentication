@@ -10,4 +10,10 @@
     "role": "Admin"
 }
 ```
+```json
+{
+	"username": "aditya",
+    "password": "adityaKumar"
+}
+```
 

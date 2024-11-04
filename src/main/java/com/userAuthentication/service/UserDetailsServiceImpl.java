@@ -31,7 +31,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 
-    public List<ProductResponseDto> getAllProduct() {
-        return client.getAllProducts().getBody();
+    public List<ProductResponseDto> getAllProduct(String token) {
+        return client.getAllProducts(token).getBody();
     }
+
+//    public ProductResponseDto addProduct(String token) {
+//
+//    }
 }

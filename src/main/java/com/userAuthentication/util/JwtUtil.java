@@ -1,14 +1,21 @@
 package com.userAuthentication.util;
 
 import com.userAuthentication.model.AuthRequest;
+import com.userAuthentication.model.UserAuthEntity;
+import com.userAuthentication.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +24,25 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "secret";
-    private SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    @Value("${jwt.secret}")
+    private String secret;
+
+    private SecretKey secretKey;
+
+    @PostConstruct
+    public void init() {
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
+        this.secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "HmacSHA256");
+    }
+    @Autowired
+    private UserRepository userRepository;
 
 
     public String generateToken(AuthRequest userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        UserAuthEntity user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow();
+        claims.put("role", user.getRole());
+        claims.put("password", user.getPassword());
         return createToken(claims, userDetails.getUsername());
     }
 

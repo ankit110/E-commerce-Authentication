@@ -69,7 +69,7 @@ public class UserController {
             throw new CmsResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized access", HttpStatus.UNAUTHORIZED.toString());
         }
 
-
-        return ResponseEntity.ok(service.getAllProduct());
+        return ResponseEntity.ok(service.getAllProduct(token));
     }
+
 }

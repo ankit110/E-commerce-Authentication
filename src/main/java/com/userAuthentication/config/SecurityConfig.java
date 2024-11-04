@@ -5,6 +5,7 @@ import com.userAuthentication.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,6 +34,9 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for stateless sessions
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/users/register", "/api/v1/users/login").permitAll()
+                .requestMatchers("/api/v1/products/**").hasAnyRole("USER", "ADMIN") // Allow both USER and ADMIN for getting products
+                .requestMatchers(HttpMethod.POST, "/api/v1/products/add").hasRole("ADMIN") //
+                .requestMatchers("/api/v1/findUsers/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .exceptionHandling(exception ->
